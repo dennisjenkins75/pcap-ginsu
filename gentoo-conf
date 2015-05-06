@@ -1,0 +1,15 @@
+# /etc/conf.d/capture
+
+# Comma seperated list of interfaces to capture traffic on.
+INTERFACE="eth0,eth1,eth2"
+
+# Halt capture id free disk space falls below this amount (in MB)
+MIN_DISK="100000"
+
+# Top-level libpcap/bpf expression for selecting which traffic to record.
+# May be blank.
+#BPF=""
+BPF="not ((dst host 10.0.0.0/8 and tcp dst port 443) or (src host 10.0.0.0/8 and tcp src port 443))"
+
+# Location of PID file.
+PID_FILE=/run/ginsu/ginsu-capture.pid

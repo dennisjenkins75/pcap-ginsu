@@ -1,0 +1,18 @@
+#!/sbin/runscript
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting ginsu capture daemon"
+	start-stop-daemon --start --quiet --pidfile "${PID_FILE}" --wait 1000 \
+		--exec /usr/local/bin/ginsu-capture -- -i "${INTERFACE}" -m "${MIN_DISK}" -d -D "${PKT_DIR}" -f "${BPF}" &>/dev/null
+	eend $?
+}
+
+stop() {
+	ebegin "Shutting down ginsu capture daemon"
+	start-stop-daemon --stop --quiet --pidfile "${PID_FILE}"  --exec /usr/local/bin/ginsu-capture
+	eend $?
+}
