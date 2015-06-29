@@ -372,7 +372,9 @@ int	main (int argc, char *argv[])
 		if (fork()) { exit (0); }
 
 // Step 4, do not keep a lock on the 'cwd'.
-		chdir ("/");
+		if (-1 == chdir ("/")) {
+			exit (-1);
+		}
 
 // Step 5, deny 'other' access to any files that we create (by default).
 		umask(007);
@@ -428,7 +430,7 @@ int	main (int argc, char *argv[])
 
 	if (-1 == fchmod (fd, 0644))
 	{
-		fprintf (stderr, "Failed to chmof pid file ('%s')\n", pid_file);
+		fprintf (stderr, "Failed to fchmod() pid file ('%s')\n", pid_file);
 		perror ("fchmod");
 		exit (EXIT_FAILURE);
 	}
@@ -510,7 +512,7 @@ bpf_done:
 		++w;
 	}
 
-// Change group first (can't change it after changing user.
+// Change group first (can't change it after changing user).
 	if (runas_gid)
 	{
 		if (-1 == setgid (runas_gid))

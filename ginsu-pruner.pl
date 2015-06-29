@@ -3,7 +3,7 @@
 # Prunes older ginsu 'queue' files from disk.
 
 # Usage:  Add to root's crontab as follows (edit to taste):
-# 10 0 * * * /usr/local/bin/ginsu-pruner.pl -d 14 -f 100000 | sh
+# 10 0 * * * /usr/local/bin/ginsu-pruner.pl -d /ginsu/queue -f 100000 | sh
 
 use strict;
 use warnings;

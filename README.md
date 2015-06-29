@@ -5,7 +5,7 @@ Ethernet packet file recorder, slicer, dicer.
 
 1. ginsu-capture: daemon that records ethernet traffic to files on disk.
 1. ginsu-slicer: tool to split, slice and merge PCAP files into other PCAP files based on a set of user-supplied filters and rules.
-1. ginsu-pruner: Perl script that deletes other PCAP files, maintaining a minimum amount of free disk space (hint: run from cron hourly or daily).
+1. ginsu-pruner: Perl script that deletes older PCAP files, maintaining a minimum amount of free disk space (hint: run from cron hourly or daily).
 
 Requires these Gentoo Linux packages:
 

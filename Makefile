@@ -1,5 +1,5 @@
 CFLAGS:= -ggdb -O2 -Wall -pipe -D_GNU_SOURCE --std=c99
-CXXFLAGS:= -ggdb -O2 -Wall -pipe -D_GNU_SOURCE -Wno-write-strings
+CXXFLAGS:= -ggdb -O2 -Wall -pipe -D_GNU_SOURCE -Wno-write-strings -Wno-unused-but-set-variable
 
 OUT_DIR:=	.
 PREFIX:=	/usr/local
