@@ -1,6 +1,6 @@
 # /etc/conf.d/capture
 
-# Comma seperated list of interfaces to capture traffic on.
+# Comma separated list of interfaces to capture traffic on.
 INTERFACE="eth0,eth1,eth2"
 
 # Halt capture id free disk space falls below this amount (in MB)
