@@ -75,7 +75,7 @@ struct worker
 	int		next_disk_check;
 	pcap_dumper_t	*dumper;
 	time_t		ts_open;
-	char		base_name[PATH_MAX];
+	char		base_name[128];
 };
 
 static struct worker workers[MAX_DEVICES];
