@@ -295,7 +295,7 @@ static void queueDirectory (const char *dir, std::vector<InputFile> &vInputs)
 			queueDirectory (path, vInputs);
 		}
 
-		if (!dirent->d_type & DT_REG) continue;
+		if (!(dirent->d_type & DT_REG)) continue;
 
 		if (fnmatch ("*.pcap", dirent->d_name, FNM_PATHNAME)) continue;
 
