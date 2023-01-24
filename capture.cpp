@@ -59,7 +59,7 @@ static char *g_bpf = NULL;
 
 // Internal.
 static const int pcap_timeout = 2500;
-static volatile int shutdown = 0;
+static volatile int my_shutdown = 0;
 static uid_t runas_uid = -1;
 static gid_t runas_gid = -1;
 static int dev_count = 0;
@@ -180,12 +180,12 @@ static void	callback (u_char *args, const struct pcap_pkthdr *hdr, const u_char 
 
 	pcap_dump ((u_char*)w->dumper, hdr, pkt);
 
-	if (shutdown || (pcap_dump_ftell (w->dumper) > (max_cap_size_mb * 1024 * 1024)))
+	if (my_shutdown || (pcap_dump_ftell (w->dumper) > (max_cap_size_mb * 1024 * 1024)))
 	{
 		close_dump_file (w);
 	}
 
-	if (shutdown)
+	if (my_shutdown)
 	{
 		pcap_breakloop (w->pcap);
 	}
@@ -204,7 +204,7 @@ static void	handler_shutdown (int n)
 		signal (sig_list[i], SIG_DFL);
 	}
 
-	shutdown = 1;
+	my_shutdown = 1;
 }
 
 static const char usage_txt[] =
@@ -536,7 +536,7 @@ bpf_done:
 	}
 
 // Multiplex capture devices until we fail or get SIGINT.
-	while (!shutdown)
+	while (!my_shutdown)
 	{
 		timeout.tv_sec = 1;
 		timeout.tv_usec = 0;
